@@ -7,8 +7,29 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="126,109,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <TextBlock Name="tb" HorizontalAlignment="Left" Margin="278,109,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="116" Width="236"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        
+            <ItemsControl x:Name="CityPanel" ItemsSource="{Binding Cities}" Grid.Row="0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate >
+                            <Button Content="{Binding Name}" Background="White" Width="150" Height="30" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        <Button Content="Refresh" Grid.Row="2" Height="50" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>

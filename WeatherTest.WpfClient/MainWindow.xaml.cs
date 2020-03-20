@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using System.Windows;
-using WeatherTest.WpfClient.WeatherServiceReference;
+﻿using System.Windows;
+using System.Windows.Threading;
+using WeatherTest.WpfClient.ViewNodels;
 
 namespace WeatherTest.WpfClient
 {
@@ -9,18 +9,24 @@ namespace WeatherTest.WpfClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly WeatherServiceClient _client; 
-
+        private Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
+        private CityViewModel model;
         public MainWindow()
         {
             InitializeComponent();
-            _client = new WeatherServiceClient();
+            model = new CityViewModel();
+            DataContext = model;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var t = _client.GetCities();
-            tb.Text = string.Join("\n", t.Select(s => s.Name).ToList());
+            
+            model.OnPropertyChanged("Cities");
+            model.PropertyChanged += (s,o) =>
+            {
+                _dispatcher.Invoke(() => CityPanel.Items.Refresh());
+            };
+            DataContext = model;
         }
     }
 }
