@@ -1,29 +1,30 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace WeatherTest.WpfClient.Models
 {
-    public class City : INotifyPropertyChanged
+    public class Temperature : INotifyPropertyChanged
     {
-        private int _id;
-        private string _name;
+        private int _degree;
+        private DateTime _dateTime;
 
-        public int Id
+        public int Degree
         {
-            get => _id;
+            get => _degree;
             set
             {
-                _id = value;
-                OnPropertyChanged("Id");
+                _degree = value;
+                OnPropertyChanged("Degree");
             }
         }
-        public string Name
+        public DateTime DateTime
         {
-            get => _name;
+            get => _dateTime;
             set
             {
-                _name = value;
-                OnPropertyChanged("Name");
+                _dateTime = value;
+                OnPropertyChanged("DateTime");
             }
         }
 

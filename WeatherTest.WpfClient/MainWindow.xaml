@@ -3,9 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WeatherTest.WpfClient"
+        xmlns:extensions="clr-namespace:WeatherTest.WpfClient.Extensions"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <extensions:DateTimeToTimeConverter x:Key="DateConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,19 +18,36 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        
-            <ItemsControl x:Name="CityPanel" ItemsSource="{Binding Cities}" Grid.Row="0">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate >
-                            <Button Content="{Binding Name}" Background="White" Width="150" Height="30" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+
+        <ItemsControl x:Name="CityPanel" ItemsSource="{Binding Cities}" Grid.Row="0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <Button Content="{Binding Name}" Tag="{Binding Id}" Background="White" Width="150" Height="30" Click="SelectCityButton_Click" />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+
+        <ItemsControl ItemsSource="{Binding Temperatures}" Grid.Row="1">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <StackPanel>
+                        <TextBlock Text="{Binding DateTime,Converter={StaticResource DateConverter}}" Background="White" Width="50" Height="30"/>
+                        <TextBlock Text="{Binding Degree}" Background="White" Width="50" Height="30"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <Button Content="Refresh" Grid.Row="2" Height="50" Width="75" Click="Button_Click"/>
 
