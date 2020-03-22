@@ -148,10 +148,10 @@ namespace WeatherTest.WpfClient.WeatherServiceReference {
         System.Threading.Tasks.Task<WeatherTest.WpfClient.WeatherServiceReference.City[]> GetCitiesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetCityWeather", ReplyAction="http://tempuri.org/IWeatherService/GetCityWeatherResponse")]
-        WeatherTest.WpfClient.WeatherServiceReference.Temperature[] GetCityWeather(int cityId);
+        WeatherTest.WpfClient.WeatherServiceReference.Temperature[] GetCityWeather(int cityId, System.DateTime dateTime);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWeatherService/GetCityWeather", ReplyAction="http://tempuri.org/IWeatherService/GetCityWeatherResponse")]
-        System.Threading.Tasks.Task<WeatherTest.WpfClient.WeatherServiceReference.Temperature[]> GetCityWeatherAsync(int cityId);
+        System.Threading.Tasks.Task<WeatherTest.WpfClient.WeatherServiceReference.Temperature[]> GetCityWeatherAsync(int cityId, System.DateTime dateTime);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -189,12 +189,12 @@ namespace WeatherTest.WpfClient.WeatherServiceReference {
             return base.Channel.GetCitiesAsync();
         }
         
-        public WeatherTest.WpfClient.WeatherServiceReference.Temperature[] GetCityWeather(int cityId) {
-            return base.Channel.GetCityWeather(cityId);
+        public WeatherTest.WpfClient.WeatherServiceReference.Temperature[] GetCityWeather(int cityId, System.DateTime dateTime) {
+            return base.Channel.GetCityWeather(cityId, dateTime);
         }
         
-        public System.Threading.Tasks.Task<WeatherTest.WpfClient.WeatherServiceReference.Temperature[]> GetCityWeatherAsync(int cityId) {
-            return base.Channel.GetCityWeatherAsync(cityId);
+        public System.Threading.Tasks.Task<WeatherTest.WpfClient.WeatherServiceReference.Temperature[]> GetCityWeatherAsync(int cityId, System.DateTime dateTime) {
+            return base.Channel.GetCityWeatherAsync(cityId, dateTime);
         }
     }
 }

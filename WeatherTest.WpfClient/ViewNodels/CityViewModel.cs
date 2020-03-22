@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -77,7 +78,7 @@ namespace WeatherTest.WpfClient.ViewNodels
 
             _dispatcher.Invoke(() =>
             {
-                var result = _client.GetCityWeather(cityId);
+                var result = _client.GetCityWeather(cityId, DateTime.Now);
 
                 var data = result.Select(t => new Models.Temperature
                 {
