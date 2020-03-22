@@ -31,11 +31,21 @@ namespace WeatherTest.WpfClient.ViewNodels
             }
         }
 
+        private bool _isNotEnoughDataForSelectedCity;
+        public bool IsNotEnoughDataForSelectedCity
+        {
+            get => _isNotEnoughDataForSelectedCity;
+            set
+            {
+                _isNotEnoughDataForSelectedCity = value;
+                OnPropertyChanged("IsNotEnoughDataForSelectedCity");
+            }
+        }
+
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            GetData();
         }
 
         public CityViewModel()
@@ -80,6 +90,8 @@ namespace WeatherTest.WpfClient.ViewNodels
                     Temperature = t
                 })
                 .ToList();
+
+                IsNotEnoughDataForSelectedCity = !data.Any();
 
                 Temperatures = new ObservableCollection<Models.BoxingTemperature>(data);
             });

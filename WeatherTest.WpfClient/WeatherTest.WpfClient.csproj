@@ -63,6 +63,7 @@
     <Compile Include="Components\WeatherGridControl.xaml.cs">
       <DependentUpon>WeatherGridControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\BoolToVisibilityConverter.cs" />
     <Compile Include="Extensions\DateTimeToTimeConverter.cs" />
     <Compile Include="Models\BoxingTemperature.cs" />
     <Compile Include="Models\Temperature.cs" />

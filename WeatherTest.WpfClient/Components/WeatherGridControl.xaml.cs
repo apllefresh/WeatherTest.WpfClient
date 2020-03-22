@@ -33,11 +33,30 @@ namespace WeatherTest.WpfClient.Components
             }
         }
 
+        public bool IsNotEnoughData
+        {
+            get 
+            {
+                return (bool)GetValue(IsNotEnoughDataProperty);
+            }
+            set
+            {
+                EmptyDataTextBlock.Visibility = value ? Visibility.Visible : Visibility.Hidden;
+                SetValue(IsNotEnoughDataProperty, value);
+            }
+        }
+
         public static readonly DependencyProperty DataProperty = DependencyProperty.Register(
             "Data",
             typeof(ObservableCollection<Models.BoxingTemperature>),
             typeof(WeatherGridControl),
             new FrameworkPropertyMetadata(new ObservableCollection<Models.BoxingTemperature>()));
+
+        public static readonly DependencyProperty IsNotEnoughDataProperty = DependencyProperty.Register(
+           "IsNotEnoughData",
+           typeof(bool),
+           typeof(WeatherGridControl),
+           new FrameworkPropertyMetadata(false));
 
         public WeatherGridControl()
         {

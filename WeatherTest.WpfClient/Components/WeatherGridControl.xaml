@@ -5,22 +5,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WeatherTest.WpfClient.Components"
              xmlns:components="clr-namespace:WeatherTest.WpfClient.Components"
-             mc:Ignorable="d" 
-             d:DesignHeight="250" Width="345.325">
+             xmlns:extensions="clr-namespace:WeatherTest.WpfClient.Extensions"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <extensions:BoolToVisibilityConverter x:Key="BoolConverter" />
+    </UserControl.Resources>
     <Grid x:Name="Grid" DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:WeatherGridControl}}">
-        <ItemsControl x:Name="CityPanel" ItemsSource="{Binding Data}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="10" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate >
-                        <components:WeatherControl WeatherData="{Binding Temperature}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Border CornerRadius="2"
+                BorderBrush="Gray"
+                Background="LightGray"
+                BorderThickness="2"
+                Padding="2">
+            <StackPanel Grid.Column="0" Margin="10">
+                <TextBlock Text="DateTime" FontSize="12"/>
+                <TextBlock Text="Degree" FontSize="12"/>
+            </StackPanel>
+        </Border>
+        <Border CornerRadius="2"
+                BorderBrush="Gray"
+                Background="LightGray"
+                BorderThickness="2"
+                Padding="5"
+                Visibility="{Binding IsNotEnoughData,Converter={StaticResource BoolConverter}}"
+                Grid.Column="1" >
+            <TextBlock x:Name="EmptyDataTextBlock" Text="Not enough data" Grid.Column="1"/>
+        </Border>
+        <Border CornerRadius="2"
+                BorderBrush="Gray"
+                Background="LightGray"
+                BorderThickness="2"
+                Padding="5"
+                Visibility="{Binding IsNotEnoughData,ConverterParameter=True, Converter={StaticResource BoolConverter}}"
+                Grid.Column="1" >
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <ItemsControl x:Name="WeatherPanel" ItemsSource="{Binding Data}" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel  Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <components:WeatherControl WeatherData="{Binding Temperature}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
