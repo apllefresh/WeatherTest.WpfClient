@@ -57,9 +57,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\WeatherControl.xaml.cs">
+      <DependentUpon>WeatherControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\WeatherGridControl.xaml.cs">
+      <DependentUpon>WeatherGridControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\DateTimeToTimeConverter.cs" />
+    <Compile Include="Models\BoxingTemperature.cs" />
     <Compile Include="Models\Temperature.cs" />
     <Compile Include="ViewNodels\CityViewModel.cs" />
+    <Page Include="Components\WeatherControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\WeatherGridControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,8 +157,6 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

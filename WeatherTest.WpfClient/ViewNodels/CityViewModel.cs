@@ -12,7 +12,7 @@ namespace WeatherTest.WpfClient.ViewNodels
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<Models.City> Cities { get; set; }
-        public ObservableCollection<Models.Temperature> Temperatures { get; set; }
+        public ObservableCollection<Models.BoxingTemperature> Temperatures { get; set; }
         private Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
         private readonly WeatherServiceClient _client;
 
@@ -75,9 +75,13 @@ namespace WeatherTest.WpfClient.ViewNodels
                     DateTime = t.DateTime
                 })
                 .OrderBy(t=> t.DateTime)
+                .Select(t=> new Models.BoxingTemperature 
+                { 
+                    Temperature = t
+                })
                 .ToList();
 
-                Temperatures = new ObservableCollection<Models.Temperature>(data);
+                Temperatures = new ObservableCollection<Models.BoxingTemperature>(data);
             });
         }
     }
