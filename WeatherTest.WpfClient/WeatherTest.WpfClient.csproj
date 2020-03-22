@@ -64,10 +64,11 @@
       <DependentUpon>WeatherGridControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions\BoolToVisibilityConverter.cs" />
+    <Compile Include="Extensions\DateTimeToHeaderConverter.cs" />
     <Compile Include="Extensions\DateTimeToTimeConverter.cs" />
     <Compile Include="Models\BoxingTemperature.cs" />
     <Compile Include="Models\Temperature.cs" />
-    <Compile Include="ViewNodels\CityViewModel.cs" />
+    <Compile Include="ViewNodels\ApplicationViewModel.cs" />
     <Page Include="Components\WeatherControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -8,7 +8,7 @@ using WeatherTest.WpfClient.WeatherServiceReference;
 
 namespace WeatherTest.WpfClient.ViewNodels
 {
-    public class CityViewModel : INotifyPropertyChanged
+    public class ApplicationViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,7 +21,7 @@ namespace WeatherTest.WpfClient.ViewNodels
 
         public int SelectedCityId
         {
-            get { return _selectedCityId; }
+            get => _selectedCityId;
             set
             {
                 _selectedCityId = value;
@@ -43,17 +43,30 @@ namespace WeatherTest.WpfClient.ViewNodels
             }
         }
 
+        private DateTime _currentDate;
+        public DateTime CurrentDate
+        {
+            get => _currentDate;
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged("CurrentDate");
+            }
+        }
+
         public virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public CityViewModel()
+        public ApplicationViewModel()
         {
             _client = new WeatherServiceClient();
             Cities = new ObservableCollection<Models.City>();
             GetData();
+            IsNotEnoughDataForSelectedCity = true;
+            CurrentDate = DateTime.Now.AddDays(1).Date;
         }
 
         private void GetData()
@@ -78,7 +91,7 @@ namespace WeatherTest.WpfClient.ViewNodels
 
             _dispatcher.Invoke(() =>
             {
-                var result = _client.GetCityWeather(cityId, DateTime.Now);
+                var result = _client.GetCityWeather(cityId, _currentDate);
 
                 var data = result.Select(t => new Models.Temperature
                 {

@@ -11,21 +11,11 @@ namespace WeatherTest.WpfClient
     public partial class MainWindow : Window
     {
         private Dispatcher _dispatcher = Dispatcher.CurrentDispatcher;
-        private CityViewModel model;
+        private ApplicationViewModel model;
         public MainWindow()
         {
             InitializeComponent();
-            model = new CityViewModel();
-            DataContext = model;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            model.OnPropertyChanged("Cities");
-            model.PropertyChanged += (s,o) =>
-            {
-                _dispatcher.Invoke(() => CityPanel.Items.Refresh());
-            };
+            model = new ApplicationViewModel();
             DataContext = model;
         }
 
